@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+<head>
+    <link rel="shortcut icon" href="../media/logo.png" type="image/x-icon">
+    <title>{% block title %}  {% endblock title %}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css" media="all">
+    <link href="{% static 'css/font-awesome.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/buttons-styles.css' %}" type="text/css" media="all">
+    <link href="//fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700"
+          rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900"
+          rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/gsap.min.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-sm fixed-top navbar-dark bg-dark" style="z-index: 3">
+    <button class="navbar-toggler " style="background-color: #343a40; border: 0" type="button" data-toggle="collapse" data-target="#nav-content" aria-controls="nav-content" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fa fa-bars" style="display: block; color: white"></i>
+    </button>
+    {% if request.user.is_staff %}
+        <a class="navbar-brand" href="{% url 'admin-main_page' %}">Сайт преподавателя</a>
+    {% else %}
+        <a class="navbar-brand" href="{% url 'user-page' %}">Сайт преподавателя</a>
+    {% endif %}
+    <div class="collapse navbar-collapse" id="nav-content">
+        <ul class="navbar-nav">
+            {% if request.user.is_staff %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'admin-main_page' %}">Предметы</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'admin-resurces' %}">Веб ресурсы</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'admin-about-prepod' %}">О преподавателе</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'admin-help_page' %}">Справка</a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'user-page' %}">Предметы</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'user-resurces' %}">Веб ресурсы</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'user-about-prepod' %}">О преподавателе</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'user-help_page' %}">Справка</a>
+                </li>
+            {% endif %}
+        </ul>
+        <div class="collapse navbar-collapse" style="cursor: default">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-4" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-user"></i> {{ request.user.name }} </a>
+                    <div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
+                        {% if request.user.is_staff %}
+                            <a class="dropdown-item" href="{% url 'admin:index' %}">Панель администратора</a>
+                            <a class="dropdown-item" href="{% url 'register' %}">Зарегистрировать</a>
+                        {% endif %}
+                        <a class="dropdown-item" href="{% url 'logout' %}">Выйти</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div id="particles-js"></div>
+<div class="count-particles">
+    {% block content %}
+    {% endblock content %}
+</div>
+</body>
+<script src="{% static 'js/scripts.js' %}"></script>
+<script src="{% static 'js/particles.min.js'%}"></script>
+<style>
+    html{
+        background: #808080;
+    }
+    #particles-js{
+        position: fixed;
+        z-index: 1;
+        width: 100%;
+    {#background: linear-gradient(90deg,#F24645  ,#4F00BC );#}
+        background-color: #ede4b9;
+    }
+    .count-particles{
+        {#max-width: 800px;#}
+        box-sizing: border-box;
+        position: relative;
+        z-index: 2;
+        margin: 50px auto;
+
+    }
+
+    @media (min-width: 320px) {
+        #particles-js{
+            height: 100%;
+        }
+    }
+</style>
+<script>
+    particlesJS("particles-js", {
+        "particles": {
+            "number": {
+                "value": 100,
+                "density": {
+                    "enable": true,
+                    "value_area": 800
+                }
+            },
+            "color": {
+                "value": "#000"
+            },
+            "shape": {
+                "type": "circle",
+                "stroke": {
+                    "width": 0,
+                    "color": "#fff"
+                },
+                "polygon": {
+                    "nb_sides": 5
+                },
+                "image": {
+                    "src": "img/github.svg",
+                    "width": 100,
+                    "height": 100
+                }
+            },
+            "opacity": {
+                "value": 0.5,
+                "random": false,
+                "anim": {
+                    "enable": false,
+                    "speed": 1,
+                    "opacity_min": 0.1,
+                    "sync": false
+                }
+            },
+            "size": {
+                "value": 3,
+                "random": true,
+                "anim": {
+                    "enable": false,
+                    "speed": 40,
+                    "size_min": 0.1,
+                    "sync": false
+                }
+            },
+            "line_linked": {
+                "enable": true,
+                "distance": 150,
+                "color": "#000",
+                "opacity": 0.4,
+                "width": 1
+            },
+            "move": {
+                "enable": true,
+                "speed": 6,
+                "direction": "none",
+                "random": false,
+                "straight": false,
+                "out_mode": "out",
+                "bounce": false,
+                "attract": {
+                    "enable": false,
+                    "rotateX": 600,
+                    "rotateY": 1200
+                }
+            }
+        },
+        "interactivity": {
+            "detect_on": "canvas",
+            "events": {
+                "onhover": {
+                    "enable": true,
+                    "mode": "grab"
+                },
+                "onclick": {
+                    "enable": true,
+                    "mode": "push"
+                },
+                "resize": true
+            },
+            "modes": {
+                "grab": {
+                    "distance": 140,
+                    "line_linked": {
+                        "opacity": 1
+                    }
+                },
+                "bubble": {
+                    "distance": 400,
+                    "size": 40,
+                    "duration": 2,
+                    "opacity": 8,
+                    "speed": 3
+                },
+                "repulse": {
+                    "distance": 200,
+                    "duration": 0.4
+                },
+                "push": {
+                    "particles_nb": 4
+                },
+                "remove": {
+                    "particles_nb": 2
+                }
+            }
+        },
+        "retina_detect": true
+    });
+
+
+    /* ---- stats.js config ---- */
+
+    var count_particles, stats, update;
+    stats = new Stats;
+    stats.setMode(0);
+    stats.domElement.style.position = 'absolute';
+    stats.domElement.style.left = '0px';
+    stats.domElement.style.top = '0px';
+    document.body.appendChild(stats.domElement);
+    count_particles = document.querySelector('.js-count-particles');
+    update = function() {
+        stats.begin();
+        stats.end();
+        if (window.pJSDom[0].pJS.particles && window.pJSDom[0].pJS.particles.array) {
+            count_particles.innerText = window.pJSDom[0].pJS.particles.array.length;
+        }
+        requestAnimationFrame(update);
+    };
+    requestAnimationFrame(update);
+</script>
+<style>
+    tbody{
+        color: white;
+    }
+</style>
+</html>

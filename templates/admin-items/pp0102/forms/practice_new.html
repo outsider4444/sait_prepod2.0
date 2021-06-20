@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container h-100" >
+    <div class="row h-100 justify-content-center align-items-center">
+        <h3 style="color: #000; margin-top: 50px; text-align: center">Добавление практики по предмету "ПП.01.02. Прикладное программирование"</h3>
+
+        <form action="" class="col-12" method="post" enctype="multipart/form-data" style="color: #000; padding: 20px; margin-top: 50px">
+            {% csrf_token %}
+            <div hidden>Название предмета: {{ form.items_code }}</div>
+            <div class="form-row" style="margin-top: 10px">
+                    <div class="form-group col-md-12">
+                        <label for="">Название практики:</label>
+                        {{ form.name }}
+                    </div>
+                </div>
+            <div class="form-row" style="margin-top: 10px">
+                    <div class="form-group col-md-12">
+                        <label for="">Файл практики:</label>
+                        {{ form.file }}
+                    </div>
+                </div>
+            <div class="form-row" style="margin-top: 10px">
+                    <div class="form-group col-md-12">
+                        <label for="">Дата:</label>
+                        {{ form.date }}
+                    </div>
+                </div>
+            <span>{{ error }}</span>
+            <button type="submit" class="pressed-button-green">Подтвердить</button>
+        </form>
+    </div>
+</div>
+
+    <script>
+        let id_name = document.getElementById('id_name'); id_name.className = 'form-control';
+        let id_file = document.getElementById('id_file'); id_file.className = 'form-control';
+        let id_date = document.getElementById('id_date'); id_date.className = 'form-control';
+        //Скрытый <select> для редактирования календаря
+        let items_code = document.getElementById("id_items_code");
+        for(i=0; i<items_code.options.length; i++){
+            if(items_code.options[i].value == "{{ item.id }}"){
+                items_code.selectedIndex = i;
+            }
+        }
+    </script>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'admin-items/base.html' %}
+
+{%  block items %}
+    <div class="container h-100">
+        <div class="row h-100 justify-content-center align-items-center">
+            <h3 style="color: #000; margin-top: 50px; text-align: center">Список лекций по предмету "ПП.01.02. Прикладное программирование"</h3>
+            <div class="justify-content-center" style="margin-top: 20px">
+                <a href="{% url 'admin-pp0102-lecture' %}" class="pressed-button-green">Показать лекции</a>
+                <a href="{% url 'admin-pp0102-practice' %}" class="pressed-button-green">Показать практики</a>
+            </div>
+        </div>
+        <div class="row h-100 justify-content-center align-items-center">
+            <div class="justify-content-center" style="margin-top: 20px">
+                <a href="{% url 'admin-pp0102_new_lecture' %}" class="pressed-button-blue">Создать новую лекцию</a>
+                <a href="{% url 'admin-pp0102_students_marks' %}" class="pressed-button-blue">Просмотерть оценки</a>
+            </div>
+        </div>
+        <div class="row h-100 justify-content-center align-items-center">
+            <div class="justify-content-center" style="margin-top: 20px">
+                <table class="table table-responsive">
+                    <thead class="thead-dark">
+                    <th>Название лекции</th>
+                    <th>Дата создания</th>
+                    <th>Удалить</th>
+                    </thead>
+                    <tbody>
+                    {% for lec in lectures %}
+                        <tr>
+                            <td><a href="{{ lec.id }}_download">{{ lec.name }}</a></td>
+                            <td style="color: black">{{ lec.date }}</td>
+                            <td><a href="{{ lec.id }}">Удалить</a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock items %}

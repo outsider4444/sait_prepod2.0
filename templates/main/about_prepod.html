@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    <div style="width: 100%; color: black;">
+    <img src="../../media/prepod_photos/JYiYEXKdM9I.jpg" alt="Надеждина Алена Валерьевна" id="prepod_photo" class="img img-fluid" style="float: left;">
+    <div style="width: 100%;">
+        <div style="float: left; margin-top: 50px; padding-left: 40px" id="prepod_info">
+            <h3>Надеждина Анна Викторовна</h3>
+            Образование: <br>
+            Казанский федеральный университет "КФУ"<br>
+            <ol>
+                <li>Диплом о среднем профессиональном образовании по специальности "Программное обеспечение вычислительной техники и автоматизированных систем", присвоена квалификация - "Техник", 2011г.</li>
+                <li>Диплом бакалавра по направлению подготовки "230100 Информатика и вычислительная техника", 2014г.</li>
+                <li>Диплом магистра с отличием по направлению подготовки "09.04.01 Информатика и вычислительная техника", 2017г.</li>
+                <li>Диплом о профессиональной переподготовке по программе "Педагогика и психология", 2018г.</li>
+            </ol>
+        <p>Общий стаж: 8 лет</p>
+        <p>Email -<a href="mailto:annaviktoria91@mail.ru"> annaviktoria91@mail.ru</a> </p>
+            <p><a href="https://kpfu.ru/">Сайт КФУ</a></p>
+            <p>Наименование учебного заведения: Казанский авиационно-технический колледж имени П.В.Дементьева</p>
+        </div >
+    </div>
+
+    </div>
+    <style>
+    @media(min-width: 320px) {
+        #prepod_photo{
+            width: 320px;
+            height: 320px;
+            margin-top: 50px;
+        }
+    }
+     @media(min-width: 375px) {
+         #prepod_photo{
+             width: 340px;
+             height: 340px;
+             display: block;
+    margin-left: 5%;
+        }
+    }
+    @media(min-width: 400px) {
+        #prepod_photo{
+            width: 340px;
+            height: 340px;
+        }
+    }
+    @media(min-width: 768px) {
+        #prepod_photo{
+            width: 400px;
+            height: 400px;
+        }
+        #prepod_info{
+            max-width: 368px;
+            font-size: 16pt;
+        }
+    }
+    @media(min-width: 1024px) {
+        #prepod_photo{
+            width: 450px;
+            height: 450px;
+             margin-top: 50px;
+            margin-left: 40px
+        }
+        #prepod_info{
+            max-width: 500px;
+        }
+    }
+    @media(min-width: 1400px) {
+        #prepod_photo{
+            width: 600px;
+            height: 600px;
+        }
+        #prepod_info{
+            max-width: 600px;
+        }
+    }
+    </style>
+{% endblock content %}

@@ -1,0 +1,73 @@
+{% extends 'accounts/student/items/base.html' %}
+
+{% block items %}
+    <div class="container h-100">
+        <div class="row h-100 justify-content-center align-items-center">
+            <h3 style="color: #fff; margin-top: 50px; text-align: center">
+                Таблица оценок студента {{ user.name }} {{ user.surname }} по предмету ПП.01.02. Прикладное программирование
+            </h3>
+        </div>
+    </div>
+
+    <div id="calendar-search" style="color: white;">
+        <form action="{% url 'user-pp0102-marks-filter' %}" method="get">
+            {% csrf_token %}
+            <div class="form-row" style="width: 100%;">
+                <div class="form-group col-md-4">
+                    <label for="inputEmail4">Дата больше или равна:</label>
+                    {{ mark_filter.form.start_date }}
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="inputPassword4">Дата меньше или равна:</label>
+                    {{ mark_filter.form.end_date }}
+                </div>
+                <button type="submit" class="pressed-button-green">Поиск</button>
+            </div>
+        </form>
+    </div>
+
+    <div id="id_students_list">
+        <table id="id_students_list" class="table table-responsive table-bordered">
+            <thead class="thead-dark">
+            <tr> <th>Средний балл</th>
+                {% for date in delta_date %}
+                    <th>{{ date }}</th>
+                {% endfor %}
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>{{ sr_ball }}</td>
+                {% for date in date_days  %}
+                    <td>
+                        {% for mark in marks %}
+                            {% if mark.users_code.id == user.id %}
+                                {% if mark.date.day == date %}
+                                    {{ mark.mark }}
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                {% endfor %}
+            </tr>
+            <tr> <td>Комментарий</td>
+                {% for date in date_days  %}
+                    <td>
+                        {% for mark in marks %}
+                            {% if mark.users_code.id == user.id %}
+                                {% if mark.date.day == date %}
+                                    {{ mark.comment }}
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                {% endfor %}
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <script>
+        let id_start_date = document.getElementById('id_start_date'); id_start_date.className = 'form-control';id_start_date.required = true;
+        let id_end_date = document.getElementById('id_end_date'); id_end_date.className = 'form-control';id_end_date.required = true;
+    </script>
+{% endblock items %}

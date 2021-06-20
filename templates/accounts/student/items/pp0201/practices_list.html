@@ -1,0 +1,35 @@
+{% extends 'accounts/student/items/base.html' %}
+
+{% block items %}
+    <div class="container h-100">
+        <div class="row h-100 justify-content-center align-items-center">
+            <h3 style="color: #fff; margin-top: 50px; text-align: center">Список практик по предмету "ПП.02.01. Прикладное программирование"</h3>
+        <a href="{% url 'user-pp0201-lecture' %}" class="btn btn-success btn-lg">Лекции</a>
+        <a href="{% url 'user-pp0201-practice' %}" class="btn btn-success btn-lg">Практики</a>
+    </div>
+    </div>
+    <div class="row h-100 justify-content-center align-items-center">
+        <div class="justify-content-center" style="margin-top: 20px">
+            <a class="btn btn-primary" href="{% url 'user-pp0201-marks' %}">Оценки</a>
+            <a href="{% url 'admin-pp0102_students_marks' %}" class="pressed-button-blue">Просмотерть оценки</a>
+        </div>
+    </div>
+    <div class="row h-100 justify-content-center align-items-center">
+        <div class="justify-content-center" style="margin-top: 20px">
+            <table class="table table-responsive">
+                <thead class="thead-dark">
+                <th>Название практики</th>
+                <th>Дата создания</th>
+                </thead>
+                <tbody>
+                {% for prac in practice %}
+                    <tr>
+                        <td><a href="{{ prac.id }}_download">{{ prac.name }}</a></td>
+                        <td>{{ prac.date }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock items %}

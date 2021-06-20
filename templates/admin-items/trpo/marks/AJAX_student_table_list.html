@@ -1,0 +1,86 @@
+{% load poll_extras %}
+<table id="" class="table table-responsive" border="1px black">
+    <thead class="thead-dark">
+    <tr>
+        <th>ФИО студента</th><th>Средний балл</th>
+        {% for date in delta_date %}
+            <th>{{ date }}</th>
+        {% endfor %}
+
+    </tr>
+    </thead>
+    <tbody style="color: black;">
+    {% for stud in marks|values:"users_code"|distinct %}
+        {% if stud.group.code == 331 %}
+            <tr>
+                <td>{{ stud.name }} {{ stud.surname }}({{ stud.group }})</td>
+                <td>
+                    {% for key, values in dic_sr_ball.items %}
+                        {% if key == stud.id %}
+                            {{ values }}
+                        {% endif %}
+                    {% endfor %}</td>
+                {% for days in date_days %}
+                    <td>
+                        {% for marks_date in marks %}
+                            {% if marks_date.date.day == days %}
+                                {% if marks_date.users_code == stud %}
+                                    {{ marks_date.mark }}
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                {% endfor %}
+            </tr>
+            <tr> <td  style="border-top: 0">Комментарий</td><td  style="border-top: 0">#</td>
+                {% for date in date_days  %}
+                    <td style="border-top: 0">
+                        {% for marks_date in marks %}
+                            {% if marks_date.date.day == date %}
+                                {% if marks_date.users_code == stud %}
+                                    {{ marks_date.comment }}
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                {% endfor %}
+            </tr>
+        {% endif %}
+        {% if stud.group.code == 332 %}<tr>
+            <td>{{ stud.name }} {{ stud.surname }}({{ stud.group }})</td>
+            <td>
+                {% for key, values in dic_sr_ball.items %}
+                    {% if key == stud.id %}
+                        {{ values }}
+                    {% endif %}
+                {% endfor %}</td>
+            {% for days in date_days %}
+                <td>
+                    {% for marks_date in marks %}
+                        {% if marks_date.date.day == days %}
+                            {% if marks_date.users_code == stud %}{% if marks_date.users_code == stud %}
+                                {{ marks_date.mark }}{% endif %}
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                </td>
+            {% endfor %}
+        </tr>
+            <tr> <td  style="border-top: 0">Комментарий</td><td  style="border-top: 0">#</td>
+                {% for date in date_days  %}
+                    <td style="border-top: 0">
+                        {% for marks_date in marks %}
+                            {% if marks_date.date.day == date %}
+                                {% if marks_date.users_code == stud %}
+                                    {{ marks_date.comment }}
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                {% endfor %}
+            </tr>
+        {% endif %}
+
+    {% endfor %}
+    </tbody>
+</table>

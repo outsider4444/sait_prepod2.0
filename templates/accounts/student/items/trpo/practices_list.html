@@ -1,0 +1,36 @@
+{% extends 'accounts/student/items/base.html' %}
+
+{% block items %}
+    <div class="container h-100">
+        <div class="row h-100 justify-content-center align-items-center">
+            <h3 style="color: #fff; margin-top: 50px; text-align: center">Список практик по предмету "МДК.02.01. Технология разработки программного обеспечения"</h3>
+            <div class="justify-content-center" style="margin-top: 20px">
+        <a href="{% url 'user-trpo-lecture' %}" class="pressed-button-green">Лекции</a>
+        <a href="{% url 'user-trpo_practice' %}" class="pressed-button-green">Практики</a>
+    </div>
+        </div>
+    <div class="row h-100 justify-content-center align-items-center">
+            <div class="justify-content-center" style="margin-top: 20px">
+    <a class="btn btn-primary" href="{% url 'user-trpo-marks' %}">Оценки студента</a>
+            </div>
+    </div>
+    <div class="row h-100 justify-content-center align-items-center">
+            <div class="justify-content-center" style="margin-top: 20px">
+                <table class="table table-responsive">
+                    <thead class="thead-dark">
+                    <th>Название практики</th>
+                    <th>Дата создания</th>
+                    </thead>
+                <tbody style="color: white;">
+                    {% for prac in practice %}
+                        <tr>
+                            <td><a href="{{ prac.id }}_download">{{ prac.name }}</a></td>
+                            <td>{{ prac.date }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock items %}

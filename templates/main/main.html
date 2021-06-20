@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="row h-100 justify-content-center align-items-center" style="width: 100%;">
+        <div class="col-10" style="min-width: 320px; margin-top: 100px;  max-width: 800px;">
+
+            <div class="form-row justify-content-center" style="margin-top: 15px">
+                <div class="form-group col-sm-12">
+                    <div class="card border-secondary">
+                        <div class="card-header bg-secondary text-white">
+                            МДК.02.01. Технология разработки программного обеспечения
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">Открыть страницу предмета "МДК.02.01. Технология разработки программного обеспечения"</p>
+                            <a href="{% url 'admin-trpo-lecture' %}" class="btn btn-secondary">Перейти на страницу предмета</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row justify-content-center" style="margin-top: 15px">
+                <div class="form-group col-sm-12">
+                    <div class="card border-secondary">
+                        <div class="card-header bg-secondary text-white">
+                            ПП.02.01. Прикладное программирование
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">Открыть страницу предмета "МДК.02.01. Прикладное программирование"</p>
+                            <a href="{% url 'admin-pp0201-lecture' %}" class="btn btn-secondary">Перейти на страницу предмета</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row justify-content-center" style="margin-top: 15px">
+                <div class="form-group col-sm-12">
+                    <div class="card border-secondary">
+                        <div class="card-header bg-secondary text-white">
+                            ПП.01.02. Прикладное программирование
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">Открыть страницу предмета "МДК.01.02. Прикладное программирование"</p>
+                            <a href="{% url 'admin-pp0102-lecture' %}" class="btn btn-secondary">Перейти на страницу предмета</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+{% endblock content %}

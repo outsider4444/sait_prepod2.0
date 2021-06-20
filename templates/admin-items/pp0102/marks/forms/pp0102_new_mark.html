@@ -1,0 +1,84 @@
+{% extends 'admin-items/base.html' %}
+
+{% block content %}
+    <div class="container h-100" >
+        <div class="row h-100 justify-content-center align-items-center">
+            <h3 style="color: #000; margin-top: 50px; text-align: center">Выставление оценок по предмету "ПП.01.02. Прикладное программирование"</h3>
+
+            <form action="" method="post" class="col-12" id="id_create_mark" style="color: #000; padding: 20px; margin-top: 50px" data-group-url="{% url 'ajax_pp0102_load_groups' %}">
+                {% csrf_token %}
+
+                <div hidden>{{ form.items_code }}</div>
+                <div class="form-row" style="margin-top: 10px">
+                    <div class="form-group col-md-12">
+                        <label for="">Дата:</label>
+                        {{ form.date }}
+                    </div>
+                </div>
+                <div class="form-row" style="margin-top: 10px">
+                    <div class="form-group col-md-12">
+                        <label for="">Группа:</label>
+                        {{ form.group }}
+                    </div>
+                </div>
+                <div class="form-row" style="margin-top: 10px">
+                    <div class="form-group col-md-12">
+                        <label for="">Студент:</label>
+                        {{ form.users_code }}
+                    </div>
+                </div>
+                <div class="form-row" style="margin-top: 10px">
+                    <div class="form-group col-md-12">
+                        <label for="">Оценка:</label>
+                        {{ form.mark }}
+                    </div>
+                </div>
+                <div class="form-row" style="margin-top: 10px">
+                    <div class="form-group col-md-12">
+                        <label for="">Комментарий (опционально):</label>
+                        {{ form.comment }}
+                    </div>
+                </div>
+                <span>{{ error }}</span>
+                <button type="submit" class="pressed-button-green">Подтвердить</button>
+
+            </form>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script>
+        let id_items_code = document.getElementById('id_items_code'); id_items_code.className='form-control';
+        let id_date = document.getElementById('id_date'); id_date.className='form-control';
+        let id_group = document.getElementById('id_group'); id_group.className='form-control';
+        id_group.removeChild(id_group.querySelector('[value="1"]'));
+        id_group.removeChild(id_group.querySelector('[value="2"]'));
+        let id_users_code = document.getElementById('id_users_code'); id_users_code.className='form-control';
+        let id_mark = document.getElementById('id_mark'); id_mark.className='form-control';
+        let id_comment = document.getElementById('id_comment'); id_comment.className='form-control';
+        $("#id_group").change(function () {
+            const url = $("#id_create_mark").attr("data-group-url");
+            const id_group = $('#id_group option:selected').text();  // get the selected country ID from the HTML input
+            console.log(id_group)
+
+            $.ajax({
+                url: url,
+                data: {
+                    'id_group': id_group
+                },
+                success: function (data) {
+                    $("#id_users_code").html(data);
+
+                }
+            });
+
+        });
+
+        id_items_code = document.getElementById('id_items_code');
+        for(i=0; i<id_items_code.options.length; i++){
+            if(id_items_code.options[i].value == "{{ item.id }}"){
+                id_items_code.selectedIndex = i;
+            }
+        }
+    </script>
+
+{% endblock %}
